@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/todo/todo",
+    "pages/pomodoro/pomodoro"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffa07a",
+    "navigationBarTitleText": "任务备忘录",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#dddddd",
+    "height": "100rpx",
+    "selectedColor": "#ffa07a",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/todo/todo",
+        "iconPath": "assets/egg.png",
+        "selectedIconPath": "assets/one.jpg",
+        "text": "备忘录"
+      },
+      {
+        "pagePath": "pages/pomodoro/pomodoro",
+        "iconPath": "assets/egg2.png",
+        "selectedIconPath": "assets/two.jpg",
+        "text": "番茄钟"
+      }
+    ]
+  }
+}

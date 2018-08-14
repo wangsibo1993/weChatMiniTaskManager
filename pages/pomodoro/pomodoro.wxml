@@ -1,0 +1,49 @@
+<!--pages/pomodoro/pomodoro.wxml-->
+<view class="container timer {{isRuning ? 'timer--runing': ''}}">
+  <view class="timer_main">
+    <view class="timer_time-wrap" bindtap='showConfig'>
+      <view class="timer_progress_mask" bindtap='showConfig'></view>
+      <view class="timer_progress timer_left">
+        <view class="timer_circle" style="transform: rotate({{leftDeg}}deg);"></view>
+      </view>
+      <view class="timer_progress timer_right">
+        <view class="timer_circle" style="transform: rotate({{rightDeg}}deg);"></view>
+      </view>
+      <text wx:if="{{!completed}}" class="timer_time">{{remainTimeText}}</text>
+      <text wx:if="{{isRuning}}" animation="{{nameAnimation}}" class="timer_taskName">{{taskName}}{{completed ? '已完成！' : '中'}}</text>
+      <image wx:if="{{completed}}" class="timer_done" src="../../images/complete.png"></image>
+    </view>
+    <!-- <input type="text" placeholder-style="text-align:center" class="timer_inputname" bindinput="changeLogName" placeholder="给您的任务取个名字吧" /> -->
+  </view>
+
+  <view class="timer_footer">
+    <view bindtap="startTimer" data-type="work" class="timer_ctrl {{isRuning && timerType == 'rest' ? 'hide' : ''}}">{{isRuning ? '完成': '工作'}}
+    </view>
+  </view>
+
+
+  <view class="timer_footer">
+    <view bindtap="startTimer" data-type="rest" class="timer_ctrl {{isRuning && timerType == 'work' ? 'hide' : ''}}">{{isRuning ? '完成': '休息'}}
+    </view>
+  </view>
+  
+</view>
+
+<form>
+  <view class="section">
+    <input type="text" placeholder-style="text-align:center" class="timer_inputname" bindinput="changeLogName" placeholder="请输入你想做的事" auto-focus/>
+  </view>
+</form>
+<view class = "config {{showConfig ? '' : 'hide'}}">
+  <view class="section section_gap">
+    <view class="config_text">专注时长</view>
+    <slider bindchange="changeTime" data-type="work" value="{{workTime}}" name="slider" activeColor="#ffa07a" min="0" max="60" step="5" show-value></slider>
+  </view>
+
+  <view class="section section_gap">
+    <view class="config_text">休息时长</view>
+    <slider bindchange="changeTime" data-type="rest" value="{{restTime}}" name="slider" activeColor="#ffa07a" min="0" max="20" show-value></slider>
+  </view>
+</view>
+
+<!-- wx.vibrateShort(OBJECT) -->

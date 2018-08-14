@@ -1,0 +1,49 @@
+<view class="container">
+  <view class="header" bindgetuserinfo="getUserInfo">    
+    <text class="userinfo-nickname">{{userInfo.nickName}}</text>的备忘录
+  </view>
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <view class="add">
+      <image class="plus" src="https://raw.githubusercontent.com/zce/weapp-todos/master/assets/plus.png"/>
+      <input class="new-todo" value="{{newLi.content}}" placeholder="请输入待办事项"  auto-focus  bindinput='iptChange'/>
+    </view>
+    <view class="flex-row flex-time" wx:if="{{newLi.content}}">
+     <text class="date pick-text">请选择截止日期:</text>
+      <!--滚动选择器  -->
+      <picker mode="date" value="{{newLi.date}}" start="1949-10-01" end="2999-12-30" bindchange="bindDateChange" class="pick-date date">  
+        <view class="pick-date">  
+          {{newLi.date}}
+        </view>  
+      </picker>
+      <picker mode="time" value="{{newLi.time}}" start="00:00" end="23:59" bindchange="bindTimeChange" class="pick-time date">  
+        <view class="pick-time">  
+          {{newLi.time}}  
+        </view>  
+      </picker>
+      </view>
+    <view class="flex-row" wx:if="{{newLi.content}}">        
+      <button class="btn btn-submit" formType="submit" hover-class="btn-hover">提交</button>
+      <button class="btn btn-cancel" formType="reset">清空</button>
+    </view>
+  </form>
+  <block wx:if="{{todos.length}}">
+    <view class="footer">
+      <text class="btn" bindtap="toggleAllHandle">全选</text>
+      <text wx:if="{{leftCount}}">{{leftCount}}件待办事项</text>
+      <text class="btn" wx:if="{{ todos.length > leftCount }}" bindtap="clearCompletedHandle">删除</text>
+    </view>  
+    <view class="todos">
+      <view class="item{{item.completed?' completed':''}}" wx:for="{{todos}}" wx:key="{{index}}" bindtap="toggleTodoHandle" data-index="{{index}}">
+        <icon class="checkbox" type="{{item.completed?'success':'circle'}}"/>
+        <text class="name">{{item.content}}</text>
+        <icon class="remove" type="clear" size="16" catchtap="removeTodoHandle" data-index="{{index}}"/>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="empty">
+      <text class="title">恭喜!</text>
+      <text class="content">无待办事项.</text>
+    </view>
+  </block>
+</view>
